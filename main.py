@@ -1,7 +1,6 @@
 import flet as ft
 from datetime import datetime 
 
-#Subir este proyecto a github
 
 class SpendingApp(ft.Container):
     #Restaura los valores de las Progressbar cuando se presione el boton de apagado 
