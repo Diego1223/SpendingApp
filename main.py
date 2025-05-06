@@ -129,6 +129,7 @@ class SpendingApp(ft.Container):
         self.gastos.color = "white"
         self.page.update()
 
+
     def __init__(self, page: ft.Page):
         super().__init__(expand=True)
         self.page = page 
@@ -141,7 +142,8 @@ class SpendingApp(ft.Container):
         self.menu_usuarios = ft.PopupMenuButton(
             icon=ft.Icons.PERSON_OUTLINED,
             icon_color=ft.Colors.WHITE,
-            elevation=10, 
+            elevation=10,
+            tooltip="Usuarios", #Muestra el texto "Usuarios cuando el cursor se coloca"
             items=[
                 ft.PopupMenuItem(
                     content=ft.Row([
@@ -304,6 +306,11 @@ class SpendingApp(ft.Container):
         self.gastos = ft.ElevatedButton(text="Gastos", color=self.container2_color, bgcolor=self.container_color,
                                         style= ft.ButtonStyle(side=ft.BorderSide(1, self.container2_color), shape=ft.RoundedRectangleBorder(radius=10)),
                                         on_click=self.gastos_view)
+        
+        self.ingresos = ft.ElevatedButton(text="Ingresos",color=self.container2_color, bgcolor=self.container_color,
+                                          style=ft.ButtonStyle(side=ft.BorderSide(1, self.container2_color), shape=ft.RoundedRectangleBorder(radius=10)),
+                                          on_click=self.gastos_view)
+
         self.row_3 = ft.Container(
             height=30,
             border_radius=10,
