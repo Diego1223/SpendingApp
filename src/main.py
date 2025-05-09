@@ -1,5 +1,7 @@
 import flet as ft
 from datetime import datetime 
+import gastos 
+import ingresos
 
 
 class SpendingApp(ft.Container):
@@ -12,121 +14,6 @@ class SpendingApp(ft.Container):
         self.pgbtren.value = 0
         self.pgbvuelo.value = 0 
         self.pgb_total.value = 0
-        self.page.update()
-
-    def gastos_view(self,e=None):
-        #Progresbar1
-        #Vuelo, tren y taxi
-        self.pgbvuelo = ft.ProgressBar(value=0.7, bgcolor=self.container2_color, border_radius=5, height=5, width=150, color="white")
-        self.pgbtren = ft.ProgressBar(value=0.85, bgcolor=self.container2_color, border_radius=5, height=5, width=150, color="white")
-        self.pgbtaxi = ft.ProgressBar(value=0.65, bgcolor=self.container2_color, border_radius=5, height=5, width=150, color="white")
-        
-        self.row_4 = ft.Container(
-        bgcolor=self.container_color,
-        height=140,padding=5,
-        border_radius=10,   
-        border=ft.border.all(1, self.container2_color),
-        content=ft.Column(
-            spacing=2,
-            controls=[
-                ft.Row(
-                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-                    controls=[
-                        ft.IconButton(icon=ft.icons.DIRECTIONS_CAR_FILLED_OUTLINED, icon_color="white"),
-                        ft.Text("Viajes y Transporte", color=self.container2_color),
-                        ft.IconButton(icon=ft.icons.EDIT_CALENDAR, icon_color="white"),
-                        ]
-                    ),
-                    ft.Column(
-                        alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-                        controls=[
-                            ft.Row([
-                                ft.Text("Vuelo", color=self.container2_color, width=40),
-                                self.pgbvuelo,
-                                ft.Text("70 %", color=self.container2_color),
-                            ]),
-                            ft.Row([
-                                ft.Text("Tren", color=self.container2_color, width=40),
-                                self.pgbtren,
-                                ft.Text("85 %", color=self.container2_color),
-                            ]),
-                            ft.Row([
-                                ft.Text("Taxi", color=self.container2_color, width=40),
-                                self.pgbtaxi,
-                                ft.Text("68 %", color=self.container2_color),
-                            ]),
-                        ]
-                    ),
-                ]
-            ))
-        
-        #ProgressBar 2
-        #Valores que despues en otra funcion reanudaremos
-        self.pgbluz = ft.ProgressBar(value=0.75, bgcolor=self.container2_color, border_radius=5, height=5, width=150, color="white")
-        self.pgbagua = ft.ProgressBar(value=0.39, bgcolor=self.container2_color, border_radius=5, height=5, width=150, color="white")
-        self.pgbinternet = ft.ProgressBar(value=0.45, bgcolor=self.container2_color, border_radius=5, height=5, width=150, color="white")
-        self.row_5 = ft.Container(
-            bgcolor=self.container_color,
-            height=140,padding=5,
-            border_radius=10,   
-            border=ft.border.all(1, self.container2_color),
-            content=ft.Column(
-            spacing=2,
-            controls=[
-                 ft.Row(
-                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-                    controls=[
-                        ft.IconButton(icon=ft.icons.HOME_OUTLINED, icon_color="white"),
-                        ft.Text("Casa", color=self.container2_color),
-                        ft.IconButton(icon=ft.icons.EDIT_CALENDAR, icon_color="white"),
-                    ]),
-                ft.Column(
-                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-                    controls=[
-                        ft.Row([
-                            ft.Text("Luz", color=self.container2_color, width=60),
-                            self.pgbluz,
-                            ft.Text("75 %", color=self.container2_color),
-                            ]),
-                            ft.Row([
-                            ft.Text("Agua", color=self.container2_color, width=60),
-                            self.pgbagua,
-                            ft.Text("39 %", color=self.container2_color),
-                            ]),
-                            ft.Row([
-                            ft.Text("Internet", color=self.container2_color, width=60),
-                            self.pgbinternet,
-                            ft.Text("45 %", color=self.container2_color),
-                        ]),
-                    ]),
-                ])
-            )
-
-        #Progress bar container 3
-        self.pgb_total = ft.ProgressBar(value=0.45, bgcolor=self.container2_color, border_radius=5, height=10, width=150, color=self.blue_color)
-        self.row_6 = ft.Container(
-            bgcolor=self.container_color,
-            height= 70,padding=10,
-            border_radius=10,
-            content=ft.Row(
-            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-            controls=[
-                ft.Column(controls=[
-                    ft.Text("Total gastado $7,800", color=self.container2_color, weight="bold",size=15),
-                    self.pgb_total
-                    ]),
-                    ft.IconButton(icon=ft.icons.POWER_SETTINGS_NEW, bgcolor="transparent",
-                    style = ft.ButtonStyle(side = ft.BorderSide(1, self.container2_color),
-                    shape=ft.RoundedRectangleBorder(radius=10)), on_click=self.restaurar_valores),
-                    ]
-                )
-            )
-        self.main_content.controls.clear()
-        self.main_content.controls.extend([self.row_4, self.row_5, self.row_6])
-
-        #Cambiamos los valores de los botones
-        self.gastos.bgcolor = self.container2_color
-        self.gastos.color = "white"
         self.page.update()
 
 
@@ -301,15 +188,21 @@ class SpendingApp(ft.Container):
                         ]
                 )
         )
+
+        #Instanciamos las clases
+        self.llamar_gastos = gastos.Clase_gastos(self) 
+        self.llamar_ingresos = ingresos.Clase_ingresos(self)
+
         #Aqui se agregara el contenido de la parte inferior
         self.main_content = ft.Column([])
-        self.gastos = ft.ElevatedButton(text="Gastos", color=self.container2_color, bgcolor=self.container_color,
+        self.btn_gastos = ft.ElevatedButton(text="Gastos", color=self.container2_color, bgcolor=self.container_color,
                                         style= ft.ButtonStyle(side=ft.BorderSide(1, self.container2_color), shape=ft.RoundedRectangleBorder(radius=10)),
-                                        on_click=self.gastos_view)
+                                        on_click=self.llamar_gastos.Gastos) #Mandamos a llamar la funcion gastos de la clase
         
-        self.ingresos = ft.ElevatedButton(text="Ingresos",color=self.container2_color, bgcolor=self.container_color,
+        self.btn_ingresos = ft.ElevatedButton(text="Ingresos",color=self.container2_color, bgcolor=self.container_color,
                                           style=ft.ButtonStyle(side=ft.BorderSide(1, self.container2_color), shape=ft.RoundedRectangleBorder(radius=10)),
-                                          on_click=self.gastos_view)
+                                          on_click=self.llamar_ingresos.Ingresos)
+
 
         self.row_3 = ft.Container(
             height=30,
@@ -323,12 +216,9 @@ class SpendingApp(ft.Container):
                                         shape=ft.RoundedRectangleBorder(radius=10) 
                                 )                                
                                 ),
-                ft.ElevatedButton(text="Ingresos",color=self.container2_color, bgcolor=self.container_color,
-                                style = ft.ButtonStyle(side = ft.BorderSide(1, self.container2_color),
-                                        shape=ft.RoundedRectangleBorder(radius=10)                                 
-                                )
-                                ),
-                self.gastos
+                self.btn_ingresos,                
+                self.btn_gastos
+                
             ])
         )
 
