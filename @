@@ -1,0 +1,52 @@
+
+   lazy.nvim 󰒲   Install (I)   Update (U)   Sync (S)   Clean (X)   Check (C)   Log (L)   Restore (R)   Profile (P)   Debug (D)  
+   Help (?) 
+
+  Total: 41 plugins
+
+  Loaded (31)
+    ● bufferline.nvim 4.04ms  VeryLazy
+    ● cmp-buffer 3.65ms  nvim-cmp
+    ● cmp-nvim-lsp 0.89ms  nvim-cmp
+    ● cmp-path 0.53ms  nvim-cmp
+    ● cmp_luasnip 0.54ms  nvim-cmp
+    ● flash.nvim 3.61ms  VeryLazy
+    ● gitsigns.nvim 12.63ms  LazyFile
+    ● lazy.nvim 14.68ms  init.lua
+    ● LazyVim 3.33ms  start
+    ● lualine.nvim 15.27ms  VeryLazy
+    ● mason-lspconfig.nvim 0.13ms  nvim-lspconfig
+    ● mason.nvim 17.71ms  nvim-lspconfig
+    ● mini.ai 1.39ms  VeryLazy
+    ● mini.comment 0.51ms  VeryLazy
+    ● mini.icons 2.63ms 󰢱 mini.icons  snacks.nvim
+    ● mini.pairs 1.88ms  VeryLazy
+    ● neodev.nvim 0.05ms  start
+    ● noice.nvim 1.79ms  VeryLazy
+    ● nui.nvim 0.13ms 󰢱 nui.object  noice.nvim
+    ● nvim-cmp 6.79ms  InsertEnter
+    ● nvim-lint 1ms  LazyFile
+    ● nvim-lspconfig 20.85ms  LazyFile
+    ● nvim-treesitter 6.44ms  VeryLazy
+    ● nvim-treesitter-textobjects 2.46ms  VeryLazy
+    ● nvim-ts-autotag 2.02ms  LazyFile
+    ● persistence.nvim 1.86ms  BufReadPre
+    ● snacks.nvim 1.69ms  start
+    ● todo-comments.nvim 3.04ms  LazyFile
+    ● tokyonight.nvim 0.34ms 󰢱 tokyonight  LazyVim
+    ● trouble.nvim 1.93ms 󰢱 trouble  lualine.nvim
+    ● which-key.nvim 0.87ms  VeryLazy
+
+  Not Loaded (8)
+    ○ catppuccin 
+    ○ conform.nvim  ConformInfo  <leader>cF (v)  <leader>cF 
+    ○ friendly-snippets  LuaSnip 
+    ○ grug-far.nvim  GrugFar  <leader>sr (v)  <leader>sr 
+    ○ lazydev.nvim  LazyDev  lua 
+    ○ LuaSnip 
+    ○ nvim-ts-context-commentstring 
+    ○ plenary.nvim 
+
+  Disabled (2)
+    ○ nvim-snippets 
+    ○ ts-comments.nvim 

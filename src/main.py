@@ -16,7 +16,6 @@ class SpendingApp(ft.Container):
         self.pgb_total.value = 0
         self.page.update()
 
-
     def __init__(self, page: ft.Page):
         super().__init__(expand=True)
         self.page = page 

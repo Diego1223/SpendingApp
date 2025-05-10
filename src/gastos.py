@@ -5,19 +5,28 @@ class Clase_gastos:
     #El constructor hace referencia a la clase SpendingApp de main.py
     def __init__(self, app):
         self.app = app
-
+    
+    def cambiar_valores_btn(self):
+        self.app.btn_gastos.bgcolor = self.app.container2_color
+        self.app.btn_gastos.color = "white" 
+        self.app.btn_gastos.style = ft.ButtonStyle(side=ft.BorderSide(0.4, "white"), shape=ft.RoundedRectangleBorder(radius=10))
+       
+        #Cambia los valores de los otros dos botones
+        self.app.btn_ingresos.color = self.app.container2_color
+        self.app.btn_ingresos.bgcolor = self.app.container_color 
+        self.app.btn_ingresos.style = ft.ButtonStyle(side=ft.BorderSide(1, self.app.container2_color), shape=ft.RoundedRectangleBorder(radius=10))
     def Gastos(self,e=None):
         #Progresbar1
         #Vuelo, tren y taxi
         self.pgbvuelo = ft.ProgressBar(value=0.7, bgcolor=self.app.container2_color, border_radius=5, height=5, width=150, color="white")
         self.pgbtren = ft.ProgressBar(value=0.85, bgcolor=self.app.container2_color, border_radius=5, height=5, width=150, color="white")
         self.pgbtaxi = ft.ProgressBar(value=0.65, bgcolor=self.app.container2_color, border_radius=5, height=5, width=150, color="white")
-        
+        bgcolor=self.app         
         self.row_4 = ft.Container(
         bgcolor=self.app.container_color,
         height=140,padding=5,
         border_radius=10,   
-        border=ft.border.all(1, self.app.container2_color),
+        border=ft.border.all(1, self.app.container2_color), #Sirve para darle el color de los bordes
         content=ft.Column(
             spacing=2,
             controls=[
@@ -116,7 +125,5 @@ class Clase_gastos:
         self.app.main_content.controls.clear()
         self.app.main_content.controls.extend([self.row_4, self.row_5, self.row_6])
 
-        #Cambiamos los valores de los botones
-        self.app.btn_gastos.bgcolor = self.app.container2_color
-        self.app.btn_gastos.color = "white"
+        self.cambiar_valores_btn()
         self.app.page.update()
