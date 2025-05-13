@@ -3,18 +3,12 @@ from datetime import datetime
 import gastos 
 import ingresos
 
+#EJECUTAR FLET RUN main.py -d
+#En ingresos poner los ingresos reales del apartado ingresos. En gastos igual
+
 
 class SpendingApp(ft.Container):
-    #Restaura los valores de las Progressbar cuando se presione el boton de apagado 
-    def restaurar_valores(self, e):
-        self.pgbagua.value = 0
-        self.pgbinternet.value = 0
-        self.pgbluz.value = 0
-        self.pgbtaxi.value =0 
-        self.pgbtren.value = 0
-        self.pgbvuelo.value = 0 
-        self.pgb_total.value = 0
-        self.page.update()
+ 
 
     def __init__(self, page: ft.Page):
         super().__init__(expand=True)

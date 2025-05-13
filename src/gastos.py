@@ -5,7 +5,17 @@ class Clase_gastos:
     #El constructor hace referencia a la clase SpendingApp de main.py
     def __init__(self, app):
         self.app = app
-    
+    #Restaura los valores del Progressbar cuando se cliquea el boton
+    def restaurar_valores(self,e):
+        self.pgbagua.value = 0
+        self.pgbinternet.value = 0
+        self.pgbluz.value = 0
+        self.pgbtaxi.value =0 
+        self.pgbtren.value = 0
+        self.pgbvuelo.value = 0 
+        self.pgb_total.value = 0
+        self.app.page.update()
+
     def cambiar_valores_btn(self):
         self.app.btn_gastos.bgcolor = self.app.container2_color
         self.app.btn_gastos.color = "white" 
@@ -118,7 +128,7 @@ class Clase_gastos:
                     ]),
                     ft.IconButton(icon=ft.icons.POWER_SETTINGS_NEW, bgcolor="transparent",
                     style = ft.ButtonStyle(side = ft.BorderSide(1, self.app.container2_color),
-                    shape=ft.RoundedRectangleBorder(radius=10)), on_click=self.app.restaurar_valores),
+                    shape=ft.RoundedRectangleBorder(radius=10)), on_click=self.restaurar_valores),
                     ]
                 )
             )
