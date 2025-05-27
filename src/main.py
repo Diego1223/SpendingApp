@@ -8,8 +8,6 @@ import ingresos
 
 
 class SpendingApp(ft.Container):
- 
-
     def __init__(self, page: ft.Page):
         super().__init__(expand=True)
         self.page = page 
