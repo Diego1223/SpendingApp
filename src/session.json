@@ -1,5 +1,7 @@
 {
-    "user_id": 26,
-    "nombre": "diego",
+    "user_id": [
+        29
+    ],
+    "nombre": "Diego",
     "is_logged": true
 }

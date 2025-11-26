@@ -12,6 +12,19 @@ si esta creado se manda a la pagina principal, si no hay archivo directamente al
 - No se puede registrar mas de una vez un correo electronico (campo UNIQUE)
 - Tratamiento de excepciones y contrasena segura 
 
+## ENUM MySQL
+- Solo puede contener valores seleccinados
+```SQL
+CREATE TABLE movimientos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    tipo ENUM('ingreso', 'egreso') NOT NULL,
+    categoria VARCHAR(100),
+    descripcion TEXT,
+    monto DECIMAL(10,2) NOT NULL,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 
 # Creditos
 
