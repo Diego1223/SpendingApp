@@ -24,6 +24,7 @@ CREATE TABLE movimientos (
     monto DECIMAL(10,2) NOT NULL,
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+```
 
 
 # Creditos
