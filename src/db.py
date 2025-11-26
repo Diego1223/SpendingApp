@@ -1,4 +1,5 @@
 import mysql.connector
+from json_manager import guardar_sesion
 
 CONFIG = {
     "host":"localhost",
@@ -10,7 +11,6 @@ CONFIG = {
 #Las primeras tablas que hare es de login
 #id, nombre, correo y contrasena (correo unique)
 
-#TODO -> HACER QUE si el correo existe, mostrar un mensaje
 
 class Database:
     def __init__(self):
@@ -29,6 +29,12 @@ class Database:
         self.usuario = self.cursor.fetchone()
         if self.usuario:
             self.user_id, self.nombre_usuario = self.usuario
+            #persistencia en el inicio de sesion
+            guardar_sesion({
+                "user_id":self.user_id,
+                "nombre":self.nombre_usuario,
+                "is_logged":True
+            })
             return True
         else:
             return False
@@ -42,8 +48,25 @@ class Database:
             self.cursor.execute(query, parametros)
             self.conexion.commit()
 
-            print("Verificado")
+            #Persistencia
+            query2 = "SELECT id FROM usuarios WHERE correo = %s"
+            parametro  = (correo,)
+            self.cursor.execute(query2, parametro)
+            user_id = self.cursor.fetchone()
+
+            #Lo guardamos en el archivo json
+            guardar_sesion({
+                "user_id": user_id,
+                "nombre": nombre,
+                "is_logged":True
+            })
+        
+        
+            return True 
         #Captura errores unique
         except mysql.connector.errors.IntegrityError as er:
             print(f"Error unique")
+            return False
+        
+        
 

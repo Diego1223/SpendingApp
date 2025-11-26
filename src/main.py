@@ -4,6 +4,9 @@ from login import IniciarSesion, Registro
 from Pagina_principal import Pagina_principal
 from json_manager import cargar_sesion
 
+#Actulizacion a futuro 
+#1. Migrar la persistencia a SQLite
+
 # Colores
 BG_COLOR = "#30304d"
 BLUE_COLOR = "#88ddfb"
@@ -34,10 +37,13 @@ class SpendingApp(ft.Container):
                 self.page.views.append(Pagina_principal(self.page))
             else:
                 #Redireccion automatica si ya tiene sesion
+                #sesion.get dice -> quiero saber si el diccionario tiene el valor logged 
+                #si lo tiene damelo si no manda False
                 if sesion.get("is_logged", False):
                     self.page.go("/Pagina_principal")
                     return #Es importante parar aqui
             self.page.update()
+                
 
         self.page.on_route_change = route_change
         self.page.go(self.page.route)

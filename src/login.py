@@ -1,7 +1,6 @@
 import flet as ft
 import db
 from Pagina_principal import Pagina_principal
-from json_manager import guardar_sesion
 
 # --- Colores base ---
 BG_COLOR = "#30304d"
@@ -95,12 +94,6 @@ class IniciarSesion(ft.View, Base):
         data.verificar_usuario(self.correo.value, self.contrasena.value) 
         #Si esta correcto te manda a la pagina principal, si no pues te lanza un alert dialog
         if  data.usuario: #usuario es el del cursor.fetchone
-            #Guardar sesion
-            guardar_sesion({
-                "id":data.user_id,
-                "nombre":data.nombre_usuario,
-                "is_logged":True
-            })
             self.page.go("/Pagina_principal")
         else:
             self.dlg_iniciarSesion = ft.AlertDialog(
@@ -158,12 +151,26 @@ class Registro(ft.View, Base):
         
         #Si no hay errores ira a otra pagina - que sera la pagina principal
         data = db.Database()
-        data.crear_usuario(self.nombre.value, self.correo.value, self.contrasena.value)
-        if data:
+
+        #Tenemos que ponerlo en una variable el resultado
+        #porque si hacemos if data como lo estabamos haciendo devolvera true siempre porque hacemos referencia al objeto de la clase
+        #no al resultado que tenemos
+        resultado = data.crear_usuario(self.nombre.value, self.correo.value, self.contrasena.value)
+        if resultado:
             self.page.go("/Pagina_principal")
         else:
-            print("No")
-
+            #Mostrar que su correo esta repetido!
+            dlg = ft.AlertDialog(
+                title=ft.Text("Correo inhabil", text_align="center", weight=ft.FontWeight.BOLD, color=ft.Colors.RED_300),
+                content=ft.Container(width=400, height=100,content=ft.Text("Tu correo ya existe en nuestra base de datos", text_align="center")),
+                content_padding=20,
+                elevation=50,
+            )
+            self.page.open(dlg)
+            self.page.update()
+            
+            self.page.go("/")
+            return 
 
     def __init__(self, page):
         super().__init__(
