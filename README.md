@@ -12,8 +12,9 @@ si esta creado se manda a la pagina principal, si no hay archivo directamente al
 - No se puede registrar mas de una vez un correo electronico (campo UNIQUE)
 - Tratamiento de excepciones y contrasena segura 
 
-## ENUM MySQL
+## ENUM en MySQL
 - Solo puede contener valores seleccinados
+
 ```SQL
 CREATE TABLE movimientos (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -26,9 +27,7 @@ CREATE TABLE movimientos (
 );
 ```
 
-
 # Creditos
-
 Esta aplicacion es inspirada en el codigo de @MagnoEfren, con nuevas funcionalidades, diferentes directorios, pero sigue el paradigma orientado a objetos con el que fue escrito principalmente
 
 

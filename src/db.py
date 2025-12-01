@@ -1,5 +1,6 @@
 import mysql.connector
-from json_manager import guardar_sesion
+
+from json_manager import guardar_sesion, cargar_sesion
 
 CONFIG = {
     "host":"localhost",
@@ -21,6 +22,10 @@ class Database:
             print("Error base de datos")
 
     
+class Login(Database):
+    def __init__(self):
+        super().__init__()
+
     def verificar_usuario(self, nombre:str, contrasena: str) -> bool:
         query = "SELECT id, nombre FROM usuarios WHERE nombre = %s AND contrasena = %s"
         parametros= (nombre, contrasena)
@@ -68,5 +73,50 @@ class Database:
             print(f"Error unique")
             return False
         
+
+class Movimientos(Database):
+    def __init__(self):
+        super().__init__()
+
         
+    def mostrar_ingreso(self):
+        sesion = cargar_sesion()
+        self.user_id = sesion.get("user_id") #Si no existe solo devuelve None
+
+        #SUM es para sumar los ingresos (total de ingresos)
+        query = "SELECT SUM(monto) FROM movimientos WHERE usuario_id = %s AND tipo = 'ingreso'"
+        parametro = (self.user_id)
+
+        self.cursor.execute(query, parametro)
+        ingreso = self.cursor.fetchone()[0] #-> [0] Es una tupla, por eso se accede asi
+        return ingreso
+
+    def mostrar_egresos(self):
+        sesion = cargar_sesion()
+        self.user_id = sesion.get("user_id") #Si no existe solo devuelve None
+
+        #SUM es para sumar los ingresos (total de ingresos)
+        query = "SELECT SUM(monto) FROM movimientos WHERE usuario_id = %s AND tipo = 'egreso'"
+        parametro = (self.user_id)
+
+        self.cursor.execute(query, parametro)
+        egreso = self.cursor.fetchone()[0] #-> [0] Es una tupla, por eso se accede asi
+        return egreso
+    
+
+    def obtener_ingresos(self):
+        query = """
+            SELECT monto, fecha, tipo
+            FROM movimientos
+            WHERE usuario_id = %s AND tipo = 'ingreso'
+            ORDER BY fecha ASC
+            """     
+        
+        self.cursor.execute(query, (self.user_id))
+        resultados = self.cursor.fetchall()
+
+        #los resultados los recibimos asi: (lista de tuplas)
+        #[(1200, '2025-01-05'), (1500, '2025-01-12')]
+        return resultados
+    
 

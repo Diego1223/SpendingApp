@@ -89,7 +89,7 @@ class IniciarSesion(ft.View, Base):
     #data.user -> para acceder a los valores del metodo de la clase Database 
     def clicked(self, e):
         #Instancia a conexion a base de datos para verificar si existe el usuario
-        data = db.Database()
+        data = db.Login()
 
         data.verificar_usuario(self.correo.value, self.contrasena.value) 
         #Si esta correcto te manda a la pagina principal, si no pues te lanza un alert dialog
@@ -150,7 +150,7 @@ class Registro(ft.View, Base):
             return #importante detener aqui la funcion
         
         #Si no hay errores ira a otra pagina - que sera la pagina principal
-        data = db.Database()
+        data = db.Login()
 
         #Tenemos que ponerlo en una variable el resultado
         #porque si hacemos if data como lo estabamos haciendo devolvera true siempre porque hacemos referencia al objeto de la clase
